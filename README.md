@@ -19,9 +19,9 @@ Det følger med en testkontoutskrift med tilhørende testkategorier - disse kan 
 
 For å kjøre en konvertering gjør du som følger
 
-`skan2ynab _konteksportfil.csv_ _YNAB-kategorifil_`
+`skan2ynab kontoeksportfil.csv YNAB-kategorifil`
 
-Eksempel:
+Eksempel med medfølgende testdata:
 
 `skan2ynab testkontodata.csv testkategorier`
 
@@ -30,7 +30,7 @@ Resultatfilen prefixes med _YNAB-_ og navnet på inputfilen. I eksempelet over v
 Eksport fra Skandiabanken er å benytte tabulator som feltskille og desimal-punktum som øreskilletegn.
 
 ## Kategorifil
-Kategori filen inneholder en enkel hash-tabell hvor nøkkel er regexp-streng man ønsker å matche mot _tekst_-kolonnen i fra Skandiabanken sin kontoutskrift og tilhørende YNAB _Category_. Observer at YNAB sine supportsider for CSV-import foreskriver at kategorier må eksistere ved import. Se [http://www.youneedabudget.com/support/article/csv-file-importing]() for mer informasjon.
+Kategorifilen inneholder en enkel hash-tabell hvor nøkkel er regexp-streng man ønsker å matche mot _tekst_-kolonnen i fra Skandiabanken sin kontoutskrift og tilhørende YNAB _Category_. Observer at YNAB sine supportsider for CSV-import foreskriver at kategorier må eksistere ved import. Se [http://www.youneedabudget.com/support/article/csv-file-importing]() for mer informasjon.
 
 ## Begrensninger
 * Scriptet tar ikke og håndterer typene _Overføring_ eller _Minibank_. Når scripet treffer på disse linjene i kontoutskriften blir disse skrevet ut til skjermen og du må håndtere disse manuelt.
