@@ -12,6 +12,7 @@ Observer at dette er et suprtraskt og skitent hack for å løse en enkelt ting: 
 
 I husholdningen så har vi både felleskonti og private konti. Vi er ikke mer strukturert enn at vi betaler inn på fellesting både fra privatkonti og fra felleskonti. Vi har kun definert ett budsjett.
 
+
 ## Bruk
 Skriptet fungerer slik at det tar utgangspunkt i innhold fra tekstkolonnen i kontoutskriften til Skandiabanken og førsøker å regexp matche dette til informasjon i en hashtabell for å kunne plukke ut korrekt YNAB Category.
 
@@ -27,7 +28,9 @@ Eksempel med medfølgende testdata:
 
 Resultatfilen prefixes med _YNAB-_ og navnet på inputfilen. I eksempelet over vil resultatfilen bli hetende _YNAB-testkontodata.csv_.
 
-Eksport fra Skandiabanken er å benytte tabulator som feltskille og desimal-punktum som øreskilletegn.
+Eksport fra Skandiabanken er å benytte tabulator som kolonneskilletegn og desimal-punktum som øreskilletegn.
+
+For kategorien _Varekjøp_ så stripper scriptet bort de 5 første tegnene i _tekst_-kolonnen og benytter resten som verdi for YNAB _Payee_ kolonnen. Dette ser ikke nødvendigvis så veldig pent ut når man tar ut rapporter - men det er ganske generisk og krever ikke mengder av spesialhåndteringer.
 
 ## Kategorifil
 Kategorifilen inneholder en enkel hash-tabell hvor nøkkel er regexp-streng man ønsker å matche mot _tekst_-kolonnen i fra Skandiabanken sin kontoutskrift og tilhørende YNAB _Category_. Observer at YNAB sine supportsider for CSV-import foreskriver at kategorier må eksistere ved import. Se [http://www.youneedabudget.com/support/article/csv-file-importing]() for mer informasjon.
@@ -35,6 +38,7 @@ Kategorifilen inneholder en enkel hash-tabell hvor nøkkel er regexp-streng man 
 ## Begrensninger
 * Scriptet tar ikke og håndterer typene _Overføring_ eller _Minibank_. Når scripet treffer på disse linjene i kontoutskriften blir disse skrevet ut til skjermen og du må håndtere disse manuelt.
 * Scriptet har ikke støtte for kontoutskrifter fra Skandiabanken kredittkort.
+* Scriptet virker for vår husholding på våre datamaskiner - det er ingen garanti at dette vil virke på din datamaskin ;-)
 
 ## Lisens
 Lisensen for dette scriptet er veldig enkel: 
