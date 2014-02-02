@@ -1,0 +1,34 @@
+##########################################################################
+#
+# Kategorier for felleskonto
+#
+##########################################################################
+
+
+%types = ( 
+   "KIWI" => "Daglige utgifter:Mat og drikke",
+   "ICA" => "Daglige utgifter:Mat og drikke",
+   "COOP" => "Daglige utgifter:Mat og drikke",,
+   "NARVESEN" => "Daglige utgifter:Mat og drikke",
+   "MENY" => "Daglige utgifter:Mat og drikke",
+   "SPAR MAT" => "Daglige utgifter:Mat og drikke",
+   "FOOD INC" => "Daglige utgifter:Mat og drikke" ,
+   "EKSOTISK MAT" => "Daglige utgifter:Mat og drikke" ,
+
+   "EUROPRIS" => "Daglige utgifter:Ting til huset",
+   "BOOTS" => "Daglige utgifter:Ting til huset",
+   "CLAS OHLSON" => "Daglige utgifter:Ting til huset",
+   "JYSK BTK" => "Daglige utgifter:Ting til huset",
+   "NILLE"  => "Daglige utgifter:Ting til huset",
+   "ELKJ.P"  => "Daglige utgifter:Ting til huset",
+
+   "ESSO" => "Daglige utgifter:Bensin og bil",
+   "STATOIL" => "Daglige utgifter:Bensin og bil",
+
+   "ZOOSENTER" => "Daglige utgifter:Dyrehold",
+   "DYREKLINIK" => "Daglige utgifter:Dyrehold",
+
+   "WWW.NETFLIX.COM" => "Månedlige utgifter:TV - Streaming"
+);
+
+

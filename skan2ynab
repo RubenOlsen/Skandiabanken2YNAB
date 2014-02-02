@@ -1,0 +1,103 @@
+#!/usr/bin/perl
+#
+# Description in English:
+#
+# Quick and dirty hack to convert Skandiabanken CSV exports to YNAB.
+#
+# This is free software - without any kind of support or responsibilities.
+# Do whatever you want with this software - but do not ask me anything.
+#
+# Latest version https://github.com/RubenOlsen/Skandiabanken2YNAB
+#
+# Consult README.md - if you read Norwegian
+#
+##########################################################################
+
+
+%types = ( );
+
+if (0+@ARGV != 2) {
+  print "skan2ynab <filenavn> <kategorifil>\n";
+  exit;
+}
+
+$inFile = @ARGV[0];
+$outFile = "YNAB-" . $inFile ;
+require @ARGV[1] ;
+
+
+open (IF, $inFile) || die "Innfil: $inFile $!\n";
+open (OF, ">$outFile") || die "Utfil: $outFile $!\n";
+
+print OF "Date,Payee,Category,Memo,Outflow,Inflow\n";
+
+while (<IF>) {
+  $payee = $category = $memo = $out = $in = "";
+  if (/^"\d+-\d+-\d+"\t/) {
+    chop;
+    $_ =~ tr/"//d;
+    ($bokforing, $rente, $arkivref, $type, $tekst, $ut, $inn) = split(/\t/,$_);
+
+    ($Y, $M, $D) = split (/-/,  $bokforing );
+
+    $findtype = 1;
+
+    $memo = "$type $arkivref $rente";
+
+    if ($type =~ /^Overf.ring|^Mini/) {
+      print "MANUELL linje $.: $_\n";
+      next;
+    }
+
+    if ($type =~ /^Omkostninger/) {
+      $payee = "Kostnader";
+      $memo = "$type $tekst $arkivref $rente";
+    }
+
+
+    if ($type =~ /Varekj/) {
+      if ($tekst =~ /^\d+\.\d+ /) {
+	$payee = substr($tekst, 6);
+      }
+    }
+
+    if ($type =~ /^Overf.rsel/) {
+      ($payee) = ($tekst =~ /Fra: (.+) Betalt: \d+\.\d+\.\d+/);
+      $category = "Income:Available this month";
+      $memo = "$type $tekst $arkivref $rente";
+      $findtype = 0;
+    }
+
+    if ($type =~ /^Visa/) {
+      ($payee) = ($tekst =~ / \w+ \d+\.\d+ (.+) Kurs: \d+\.\d+/);
+      $memo = "$type $tekst $arkivref $rente";
+    }
+
+
+    if ($findtype == 1) {
+      reset $types;
+      $found = 0 ;
+      while ( my ($key, $value) = each(%types) ) {
+	if ($payee =~ /$key/) {
+	  $category = $value;
+	  # print "FOUND \n";
+	  $found = 1;
+	  # last;
+	} 
+      }
+      if ($found == 0) {
+	print "FEIL: Kategoritype er ikke definert for  $payee i linje $.\nAvslutter.\n";
+	close(OF);
+	unlink "outFile";
+	exit;
+      }
+    }
+
+    print OF "$D/$M/$Y,$payee,$category,$memo,$ut,$inn\n";
+  }
+
+}
+close (OF);
+
+print "YNAB importfil lagert som $outFile\n";
+
