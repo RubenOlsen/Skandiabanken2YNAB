@@ -1,6 +1,23 @@
 Skandiabanken2YNAB
 ==================
 
+2022-02-15: Det finnes nå bedre måter å gjøre dette på i 2022 så dermed arkiverer jeg dette repoet.
+
+Noen repoer å sjekke ut er f.eks.: 
+
+* https://github.com/stenjo/SbankenToYNAB
+* https://github.com/elzapp/sbanken-ynab
+* https://github.com/Wedvich/sbanken-ynab
+* https://github.com/danmusk/sbankenYNAB
+* https://github.com/torryt/sbanken-ynab-importer
+* https://github.com/andrefau/Sbanken-YNAB
+
+Det er også andre repos på GH som gjør denne jobben - listen over er ment som eksempler.
+
+Jeg vil ikke gi råd om hvilken av disse du bør bruke.
+
+----------------------------------------------------------------
+
 Dette er et enkelt script som konverterer CSV eksport fra Skandiabanken til CSV formatet som You Need A Budget krever.
 
 Grunnen til at det ligger ute på GitHub er:
